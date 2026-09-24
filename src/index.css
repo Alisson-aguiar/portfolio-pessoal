@@ -38,6 +38,7 @@ html {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-sans);
+  /* overflow-x: hidden; */
 }
 
 body {
@@ -47,6 +48,7 @@ body {
   position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* Luxury Custom Scrollbar */

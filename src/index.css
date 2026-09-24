@@ -38,7 +38,6 @@ html {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  /* overflow-x: hidden; */
 }
 
 body {
@@ -48,7 +47,6 @@ body {
   position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 /* Luxury Custom Scrollbar */
@@ -246,6 +244,10 @@ h3,
 }
 
 @media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
   .section-spacing {
     padding: 90px 0;
   }
@@ -253,7 +255,6 @@ h3,
   .nav-mobile {
     margin-top: 0px !important;
   }
-
 }
 
 @media (max-width: 400px) {

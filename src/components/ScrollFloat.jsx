@@ -98,9 +98,12 @@ export default function ScrollFloat({
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
               fontWeight: 300,
-              letterSpacing: '0.2em',
+              letterSpacing: '0.1em',
               lineHeight: 1.15,
               color: '#ffffff',
+              maxWidth: '100%',
+              wordBreak: 'break-word',
+              whiteSpace: 'normal',
             }}
           >
             {word}

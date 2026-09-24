@@ -3,7 +3,7 @@ import './ElectricBorder.css';
 
 const ElectricBorder = ({
   children,
-  color = '#06b6d4',
+  color = '#00a8ff',
   speed = 1,
   chaos = 0.12,
   borderRadius = 40,

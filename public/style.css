@@ -15,9 +15,9 @@
 
 :root {
   --bg: #171717;
-  --accent: #06b6d4;
-  --accent-dim: rgba(6, 182, 212, 0.15);
-  --accent-border: rgba(6, 182, 212, 0.3);
+  --accent: #00a8ff;
+  --accent-dim: rgba(0, 168, 255, 0.15);
+  --accent-border: rgba(0, 168, 255, 0.3);
   --white: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.75);
   --text-muted: rgba(255, 255, 255, 0.45);
@@ -70,7 +70,7 @@ body {
   position: fixed;
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(6, 182, 212, 0.6);
+  border: 1px solid rgba(0, 168, 255, 0.6);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
@@ -116,70 +116,86 @@ body {
   height: 100%;
   pointer-events: none;
   z-index: 5;
+  perspective: 1000px;
 }
 
 .scroll-card {
   position: absolute;
   width: 320px;
   padding: 30px;
-  background: rgba(23, 23, 23, 0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--accent-border);
-  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(23, 23, 23, 0.6), rgba(10, 10, 10, 0.85));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 168, 255, 0.2);
+  border-radius: 16px;
   color: var(--white);
   opacity: 0;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 168, 255, 0.05);
 }
 
 .scroll-card.card-top-left {
   top: 15%;
   left: 8%;
-  transform: translateX(-40px);
+  transform: translate(-50px, 30px) scale(0.95) rotateY(-10deg);
 }
 
 .scroll-card.active.card-top-left {
   opacity: 1;
-  transform: translateX(0);
+  transform: translate(0, 0) scale(1) rotateY(0deg);
 }
 
 .scroll-card.card-bottom-left {
   bottom: 15%;
   left: 8%;
-  transform: translateX(-40px);
+  transform: translate(-50px, 30px) scale(0.95) rotateY(-10deg);
 }
 
 .scroll-card.active.card-bottom-left {
   opacity: 1;
-  transform: translateX(0);
+  transform: translate(0, 0) scale(1) rotateY(0deg);
 }
 
 .scroll-card.card-top-right {
   top: 15%;
   right: 8%;
-  transform: translateX(40px);
+  transform: translate(50px, 30px) scale(0.95) rotateY(10deg);
 }
 
 .scroll-card.active.card-top-right {
   opacity: 1;
-  transform: translateX(0);
+  transform: translate(0, 0) scale(1) rotateY(0deg);
 }
 
 .scroll-card.card-bottom-right {
   bottom: 15%;
   right: 8%;
-  transform: translateX(40px);
+  transform: translate(50px, 30px) scale(0.95) rotateY(10deg);
 }
 
 .scroll-card.active.card-bottom-right {
   opacity: 1;
-  transform: translateX(0);
+  transform: translate(0, 0) scale(1) rotateY(0deg);
 }
 
 .scroll-card h3 {
   font-family: var(--font-editorial);
   font-size: 1.6rem;
   margin-bottom: 12px;
-  color: var(--accent);
+  color: var(--white);
+  letter-spacing: 0.02em;
+  text-shadow: 0 4px 15px rgba(0, 168, 255, 0.5);
+}
+
+.scroll-card h3::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--accent);
+  margin-top: 12px;
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--accent);
 }
 
 .scroll-card p {
@@ -187,9 +203,10 @@ body {
   font-size: 0.95rem;
   line-height: 1.6;
   color: var(--text-secondary);
+  font-weight: 300;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .scroll-card {
     width: 400px;
     padding: 40px;
@@ -240,15 +257,15 @@ body {
 #video-end-banner {
   position: absolute;
   top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: left;
   z-index: 50;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.8s ease;
-  width: 90%;
-  max-width: 900px;
+  width: 100%;
+  max-width: 1320px;
   max-height: 90vh;
   /* NÃO passa da viewport */
   overflow-y: auto;
@@ -257,7 +274,7 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: 40px;
+  padding: 0 24px;
   border-radius: 20px;
   /* margin-top removido — era o culpado do corte */
   scrollbar-width: none;
@@ -277,11 +294,87 @@ body {
   pointer-events: auto;
 }
 
+/* ── VIDEO END CARDS ──────────────────────────────── */
+#video-end-cards {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#video-end-cards.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.highlight-card {
+  background: rgba(23, 23, 23, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 168, 255, 0.2);
+  border-left: 4px solid var(--accent);
+  border-radius: 16px;
+  padding: 24px;
+  width: 280px;
+  color: var(--white);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  
+  opacity: 0;
+}
+
+#video-end-cards.visible .highlight-card {
+  animation: blinkSequence 9s infinite cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#video-end-cards.visible .highlight-card:nth-child(1) { animation-delay: 0s; }
+#video-end-cards.visible .highlight-card:nth-child(2) { animation-delay: 3s; }
+#video-end-cards.visible .highlight-card:nth-child(3) { animation-delay: 6s; }
+
+@keyframes blinkSequence {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  5%, 28% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 168, 255, 0.2);
+  }
+  33%, 100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+}
+
+.highlight-card h4 {
+  font-family: var(--font-editorial);
+  font-size: 2.2rem;
+  color: var(--white);
+  margin-bottom: 8px;
+  text-shadow: 0 4px 15px rgba(0, 168, 255, 0.5);
+  letter-spacing: 0.02em;
+}
+
+.highlight-card p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+
+
 /* Notebooks / telas de altura média */
 @media (max-height: 900px) and (min-width: 641px) {
   #video-end-banner {
-    padding: 24px 32px;
-    max-width: 780px;
     margin-top: 60px;
   }
 
@@ -463,7 +556,7 @@ body {
   transform: translate(-50%, -50%);
   width: 800px;
   height: 800px;
-  background: radial-gradient(ellipse, rgba(6, 182, 212, 0.06) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(0, 168, 255, 0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -561,7 +654,7 @@ body {
 .btn-primary:hover {
   background: #d4a882;
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(6, 182, 212, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 168, 255, 0.3);
 }
 
 .btn-secondary {
@@ -720,7 +813,7 @@ body {
 }
 
 .service-card:hover {
-  background: rgba(6, 182, 212, 0.04);
+  background: rgba(0, 168, 255, 0.04);
   border-color: var(--accent-border);
 }
 
@@ -920,7 +1013,7 @@ body {
   font-family: var(--font-editorial);
   font-size: 4rem;
   font-weight: 300;
-  color: rgba(6, 182, 212, 0.2);
+  color: rgba(0, 168, 255, 0.2);
   line-height: 1;
   margin-bottom: 20px;
   display: block;
@@ -952,7 +1045,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(6, 182, 212, 0.08) 0%, transparent 65%);
+  background: radial-gradient(ellipse at center, rgba(0, 168, 255, 0.08) 0%, transparent 65%);
 }
 
 .cta-title {
@@ -1276,6 +1369,9 @@ body {
   .section {
     padding: 80px 0;
   }
+  .nav-cta{
+    margin-right: 10px!important;
+  }
 
   .service-grid,
   .bento-grid,
@@ -1294,10 +1390,10 @@ body {
     display: none !important;
   }
 
-  .nav-mobile {
+  /* .nav-mobile {
     flex-direction: column !important;
     margin: 20px 20px 0 !important;
-  }
+  } */
 
   .banner-mobile {
     justify-content: space-between !important;
@@ -1391,7 +1487,7 @@ body {
 .scroll-indicator .mouse {
   width: 24px;
   height: 36px;
-  border: 1px solid rgba(6, 182, 212, 0.5);
+  border: 1px solid rgba(0, 168, 255, 0.5);
   border-radius: 12px;
   position: relative;
 }
@@ -1405,7 +1501,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background-color: #06b6d4;
+  background-color: #00a8ff;
   animation: scrollDown 2s infinite;
 }
 
@@ -1460,12 +1556,12 @@ body {
 
 @keyframes border-glow-pulse {
   0% {
-    border-color: rgba(6, 182, 212, 0.15);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 0 rgba(6, 182, 212, 0);
+    border-color: rgba(0, 168, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 0 rgba(0, 168, 255, 0);
   }
   100% {
-    border-color: rgba(6, 182, 212, 0.8);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(6, 182, 212, 0.4), inset 0 0 10px rgba(6, 182, 212, 0.15);
+    border-color: rgba(0, 168, 255, 0.8);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 168, 255, 0.4), inset 0 0 10px rgba(0, 168, 255, 0.15);
   }
 }
 

@@ -2,7 +2,7 @@
 import { motion, useScroll, useSpring, useTransform, useVelocity } from 'framer-motion';
 
 export default function ScrollVelocity({
-  text = "Vamos eternizar o seu próximo grande momento?",
+  text = "Vamos eternizar o seu pr�ximo grande momento?",
   baseVelocity = 2,
   className = "",
 }) {
@@ -91,17 +91,17 @@ function ParallaxText({ children, baseVelocity = 100, velocityFactor }) {
             alignItems: 'center',
             gap: '30px',
             marginRight: '30px',
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: "'JetBrains Mono', monospace",
             fontSize: 'clamp(2.5rem, 6vw, 5rem)',
             fontWeight: 300,
             textTransform: 'uppercase',
             letterSpacing: '0.02em',
             color: i % 2 === 0 ? '#ffffff' : 'transparent',
-            WebkitTextStroke: i % 2 === 0 ? 'none' : '1px rgba(6, 182, 212, 0.6)',
+            WebkitTextStroke: i % 2 === 0 ? 'none' : '1px rgba(0, 168, 255, 0.6)',
           }}
         >
           <span>{children}</span>
-          <span style={{ color: '#06b6d4', fontSize: '0.6em' }}>✦</span>
+          <span style={{ color: '#00a8ff', fontSize: '0.6em' }}>?</span>
         </span>
       ))}
     </div>

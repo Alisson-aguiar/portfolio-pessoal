@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import ScrollFloat from './ScrollFloat';
 import { ArrowUpRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Blob = ({ color, size, initialPos, animatePos, duration, delay }) => (
   <motion.div
@@ -35,55 +36,34 @@ const Blob = ({ color, size, initialPos, animatePos, duration, delay }) => (
 
 export default function AccordionGallery() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { t } = useTranslation();
+
+  const servicesTranslations = t('services.items', { returnObjects: true });
 
   const services = [
     {
-      id: 'desenvolvimento-web',
-      title: 'Desenvolvimento Web',
-      subtitle: 'Sistemas Customizados & Escaláveis',
-      description: 'Criação de soluções sob medida com código limpo e arquitetura de alta performance para atender às necessidades específicas do seu negócio.',
+      ...servicesTranslations[0],
       image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=85',
-      tag: 'Full Stack & Code',
     },
     {
-      id: 'ecommerce',
-      title: 'E-commerce',
-      subtitle: 'Lojas Virtuais de Alta Conversão',
-      description: 'Desenvolvimento de plataformas robustas utilizando WooCommerce e Shopify, focadas em usabilidade e performance para maximizar suas vendas.',
+      ...servicesTranslations[1],
       image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=85',
-      tag: 'Shopify & WooCommerce',
     },
     {
-      id: 'landing-pages',
-      title: 'Landing Pages',
-      subtitle: 'Design Orientado a Resultados',
-      description: 'Páginas corporativas e institucionais projetadas com as melhores práticas de SEO e foco total na conversão de leads e clientes.',
+      ...servicesTranslations[2],
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85',
-      tag: 'Corporate & Institutional',
     },
     {
-      id: 'ux-ui',
-      title: 'Design UX/UI',
-      subtitle: 'Interfaces Modernas e Intuitivas',
-      description: 'Criação de experiências digitais envolventes que combinam estética refinada com facilidade de uso, garantindo a melhor jornada para o usuário.',
+      ...servicesTranslations[3],
       image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1200&q=85',
-      tag: 'User Experience & Interface',
     },
     {
-      id: 'wordpress',
-      title: 'Soluções em WordPress',
-      subtitle: 'Flexibilidade e Gerenciamento',
-      description: 'Desenvolvimento de sites profissionais com WordPress, integrando plugins, desenvolvimento PHP sob medida e construtores de página avançados.',
+      ...servicesTranslations[4],
       image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=85',
-      tag: 'WordPress & Elementor',
     },
     {
-      id: 'manutencao',
-      title: 'Refatoração de Sistemas',
-      subtitle: 'Modernização e Manutenção',
-      description: 'Análise e atualização de sistemas corporativos antigos (legados), unindo refatoração de código com modernização de interface e performance.',
+      ...servicesTranslations[5],
       image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=85',
-      tag: 'Code Optimization',
     },
   ];
 
@@ -106,7 +86,7 @@ export default function AccordionGallery() {
       {/* Dynamic Animated Background Blobs */}
       <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', zIndex: 0, pointerEvents: 'none' }}>
         <Blob 
-          color="rgba(6, 182, 212, 0.25)" 
+          color="rgba(0, 168, 255, 0.25)" 
           size="600px"
           initialPos={{ x: '10%', y: '20%' }}
           animatePos={{ x: '30%', y: '60%' }}
@@ -131,8 +111,8 @@ export default function AccordionGallery() {
         />
       </div>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <ScrollFloat subtitle="Experiências Exclusivas" accent={true}>
-          Serviços & Especialidades
+        <ScrollFloat subtitle={t('services.badge')} accent={true}>
+          {t('services.title')}
         </ScrollFloat>
 
         {/* Desktop Accordion Gallery */}
@@ -199,7 +179,7 @@ export default function AccordionGallery() {
                   <div className="inactive-title">
                     <span
                       style={{
-                        fontFamily: "'Cinzel', serif",
+                        fontFamily: "'JetBrains Mono', monospace",
                         fontSize: '0.95rem',
                         letterSpacing: '0.18em',
                         textTransform: 'uppercase',
@@ -223,10 +203,10 @@ export default function AccordionGallery() {
                       style={{
                         display: 'inline-block',
                         padding: '6px 14px',
-                        backgroundColor: 'rgba(6, 182, 212, 0.2)',
+                        backgroundColor: 'rgba(0, 168, 255, 0.2)',
                         border: '1px solid var(--accent-border)',
                         borderRadius: '20px',
-                        color: '#06b6d4',
+                        color: '#00a8ff',
                         fontSize: '0.75rem',
                         fontWeight: 600,
                         letterSpacing: '0.15em',
@@ -239,7 +219,7 @@ export default function AccordionGallery() {
 
                     <h3
                       style={{
-                        fontFamily: "'Cormorant Garamond', serif",
+                        fontFamily: "'JetBrains Mono', monospace",
                         fontSize: 'clamp(1.8rem, 3vw, 2.6rem)',
                         fontWeight: 400,
                         color: '#ffffff',
@@ -252,7 +232,7 @@ export default function AccordionGallery() {
 
                     <p
                       style={{
-                        color: '#06b6d4',
+                        color: '#00a8ff',
                         fontSize: '0.9rem',
                         fontWeight: 500,
                         letterSpacing: '0.08em',
@@ -288,15 +268,15 @@ export default function AccordionGallery() {
                         fontWeight: 600,
                         letterSpacing: '0.1em',
                         textTransform: 'uppercase',
-                        borderBottom: '1px solid #06b6d4',
+                        borderBottom: '1px solid #00a8ff',
                         paddingBottom: '4px',
                         transition: 'color 0.3s ease, border-color 0.3s ease',
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = '#06b6d4')}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = '#00a8ff')}
                       onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
                     >
-                      <span>Falar sobre Projeto</span>
-                      <ArrowUpRight size={16} color="#06b6d4" />
+                      <span>{t('services.talkProject')}</span>
+                      <ArrowUpRight size={16} color="#00a8ff" />
                     </a>
                   </motion.div>
                 )}
@@ -317,7 +297,7 @@ export default function AccordionGallery() {
           .accordion-item-active {
             flex: 4.5;
             min-width: 320px;
-            border: 1px solid rgba(6, 182, 212, 0.6);
+            border: 1px solid rgba(0, 168, 255, 0.6);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
           }
           

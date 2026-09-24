@@ -165,7 +165,7 @@ const ScrollStack = ({
         if (newTransform.glow > 0) {
           card.style.boxShadow = `
             0 30px 60px rgba(0, 0, 0, ${0.4 + newTransform.glow * 0.5}), 
-            0 0 ${30 + newTransform.glow * 60}px rgba(6, 182, 212, ${newTransform.glow * 0.8})
+            0 0 ${30 + newTransform.glow * 60}px rgba(0, 168, 255, ${newTransform.glow * 0.8})
           `;
         } else {
           card.style.boxShadow = `0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05)`;

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 export default function ChromaGrid({ items, onItemClick }) {
@@ -25,7 +25,7 @@ export default function ChromaGrid({ items, onItemClick }) {
             borderRadius: '16px',
             cursor: 'pointer',
             overflow: 'hidden', // Isolado apenas no card
-            border: `1px solid ${item.borderColor || 'rgba(6, 182, 212, 0.2)'}`,
+            border: `1px solid ${item.borderColor || 'rgba(0, 168, 255, 0.2)'}`,
             boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
             backgroundColor: '#0a0a0a'
           }}
@@ -92,7 +92,7 @@ export default function ChromaGrid({ items, onItemClick }) {
             transition={{ duration: 0.4, ease: 'easeOut' }}
           >
             <span style={{ 
-              color: item.borderColor || '#06b6d4', 
+              color: item.borderColor || '#00a8ff', 
               fontSize: '0.75rem', 
               letterSpacing: '0.15em', 
               textTransform: 'uppercase',
@@ -102,7 +102,7 @@ export default function ChromaGrid({ items, onItemClick }) {
               {item.subtitle}
             </span>
             <h3 style={{
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: "'JetBrains Mono', monospace",
               fontSize: '1.8rem',
               color: '#ffffff',
               margin: 0,

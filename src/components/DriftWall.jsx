@@ -1,7 +1,10 @@
 import React from 'react';
 import ScrollFloat from './ScrollFloat';
+import { useTranslation } from 'react-i18next';
 
 export default function DriftWall() {
+  const { t } = useTranslation();
+
   const row1 = [
     { title: 'Dev Toolkit', img: '/destaques/dev-toolkit-02.jpg' },
     { title: 'Energia Solar', img: '/destaques/enegia-solar-notbook.jpg' },
@@ -23,8 +26,8 @@ export default function DriftWall() {
   return (
     <section id="destaques" className="section-spacing" style={{ position: 'relative', overflow: 'hidden' }}>
       <div className="container">
-        <ScrollFloat subtitle="Fluxo Contínuo" accent={true}>
-          Trabalhos em Destaque
+        <ScrollFloat subtitle={t('highlights.badge')} accent={true}>
+          {t('highlights.title')}
         </ScrollFloat>
       </div>
 
@@ -114,14 +117,14 @@ export default function DriftWall() {
           flex-shrink: 0;
           border-radius: 16px;
           overflow: hidden;
-          border: 1px solid rgba(6, 182, 212, 0.2);
+          border: 1px solid rgba(0, 168, 255, 0.2);
           cursor: pointer;
           transition: transform 0.4s ease, border-color 0.4s ease;
         }
 
         .drift-item:hover {
           transform: scale(1.05);
-          border-color: #06b6d4;
+          border-color: #00a8ff;
           z-index: 10;
         }
 
@@ -155,7 +158,7 @@ export default function DriftWall() {
         }
 
         .drift-overlay span {
-          font-family: 'Cinzel', serif;
+          font-family: 'JetBrains Mono', monospace;
           font-size: 0.85rem;
           letter-spacing: 0.1em;
           color: #ffffff;

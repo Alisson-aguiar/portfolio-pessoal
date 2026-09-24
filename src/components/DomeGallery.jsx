@@ -5,8 +5,10 @@ import { X, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import ScrollStack, { ScrollStackItem } from './ScrollStack';
 import ElectricBorder from './ElectricBorder';
+import { useTranslation } from 'react-i18next';
 
 export default function DomeGallery() {
+  const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -40,78 +42,80 @@ export default function DomeGallery() {
   const portfolio = [
     {
       id: 1,
-      title: 'Kanban Pro',
+      title: t('portfolio.projects.kanban.title'),
       category: 'sistemas',
-      categoryName: 'Sistemas Web',
+      categoryName: t('portfolio.categories.sistemas'),
       image: '/projetos/banner-kanban.png',
       images: ['/projetos/banner-kanban.png'],
-      description: 'Uma aplicação completa de gerenciamento de tarefas no estilo Kanban, desenvolvida com foco em experiência offline-first, sincronização em tempo real e gestão de equipes.',
+      description: t('portfolio.projects.kanban.description'),
       link: 'https://kanban-realtime-xi.vercel.app/landing',
       github: 'https://github.com/Alisson-aguiar/kanban-realtime'
     },
     {
       id: 2,
-      title: 'SaaS Analytics Platform',
+      title: t('portfolio.projects.saas.title'),
       category: 'sistemas',
-      categoryName: 'Sistemas Web',
+      categoryName: t('portfolio.categories.sistemas'),
       image: '/projetos/banner-saas.png',
       images: ['/projetos/banner-saas.png'],
-      description: 'Plataforma SaaS completa de análise de dados desenvolvida para demonstrar habilidades avançadas em desenvolvimento web full-stack.',
+      description: t('portfolio.projects.saas.description'),
       link: 'https://saas-analytics-platform-six.vercel.app/',
       github: 'https://github.com/Alisson-aguiar/saas-analytics-platform'
     },
     {
       id: 3,
-      title: 'PHP Moderno Reimaginado',
+      title: t('portfolio.projects.php.title'),
       category: 'sistemas',
-      categoryName: 'Sistemas Web',
+      categoryName: t('portfolio.categories.sistemas'),
       image: '/projetos/banner-php-evolution.png',
       images: ['/projetos/banner-php-evolution.png'],
-      description: 'Uma jornada visual e prática por tudo que transformou o PHP nos últimos anos — das dores do PHP antigo até a elegância do PHP 8.x.',
+      description: t('portfolio.projects.php.description'),
       link: 'https://evolution-php.vercel.app/',
       github: 'https://github.com/Alisson-aguiar/evolution-php'
     },
+    /*
     {
       id: 4,
       title: 'Centro Educacional Zoe',
       category: 'sites',
-      categoryName: 'Sites Profissionais',
+      categoryName: t('portfolio.categories.sites'),
       image: '/projetos/banner-centro-educacional-zoe.png',
       images: ['/projetos/banner-centro-educacional-zoe.png'],
       description: 'Site Institucional - Nível I ao 6° ano',
       link: 'https://centro-educacional-zoe.vercel.app/',
       github: ''
     },
+    */
     {
       id: 5,
-      title: 'OXM Consultoria',
+      title: t('portfolio.projects.oxm.title'),
       category: 'sites',
-      categoryName: 'Sites Profissionais',
+      categoryName: t('portfolio.categories.sites'),
       image: '/projetos/banner-oxm-consultorias.png',
       images: ['/projetos/banner-oxm-consultorias.png'],
-      description: '20 anos transformando negócios através de soluções financeiras estratégicas e personalizadas.',
+      description: t('portfolio.projects.oxm.description'),
       link: 'https://www.oxmconsultorias.com.br/',
       github: ''
     },
     {
       id: 6,
-      title: 'Energia Solar',
+      title: t('portfolio.projects.solar.title'),
       category: 'landing-pages',
-      categoryName: 'Landing Pages',
+      categoryName: t('portfolio.categories.landing'),
       image: '/projetos/banner-energia-solar.png',
       images: ['/projetos/banner-energia-solar.png'],
-      description: 'Modelo de landing page para a área de energia solar, totalmente personalizado.',
+      description: t('portfolio.projects.solar.description'),
       link: 'https://energia-solar-tan.vercel.app/',
       github: ''
     },
     {
       id: 7,
-      title: 'Fotografia 3D',
+      title: t('portfolio.projects.foto3d.title'),
       category: 'landing-pages',
-      categoryName: 'Landing Pages',
+      categoryName: t('portfolio.categories.landing'),
       image: '/projetos/banner-fotografo-3d.png',
       images: ['/projetos/banner-fotografo-3d.png'],
-      description: 'Modelo de um site fotográfico 3D totalmente personalizado com Three.js.',
+      description: t('portfolio.projects.foto3d.description'),
       link: 'https://henriquejudson.vercel.app/',
       github: ''
     },
@@ -151,7 +155,7 @@ export default function DomeGallery() {
           color: 'white',
         }}
       >
-        <span className="portfolio-category-label" style={{ color: '#06b6d4', textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 600 }}>
+        <span className="portfolio-category-label" style={{ color: '#00a8ff', textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 600 }}>
           {item.categoryName}
         </span>
         <h3 className="portfolio-card-title" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700 }}>
@@ -171,7 +175,7 @@ export default function DomeGallery() {
               className="project-action-button primary"
             >
               <ExternalLink size={16} />
-              <span>Ver Projeto</span>
+              <span>{t('portfolio.viewProject')}</span>
             </a>
           )}
           {item.github && (
@@ -183,7 +187,7 @@ export default function DomeGallery() {
               className="project-action-button secondary"
             >
               <FaGithub size={16} />
-              <span>GitHub</span>
+              <span>{t('portfolio.viewGithub')}</span>
             </a>
           )}
         </div>
@@ -218,7 +222,7 @@ export default function DomeGallery() {
             right: '-10%',
             width: '600px',
             height: '600px',
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 60%)',
+            background: 'radial-gradient(circle, rgba(0, 168, 255, 0.08) 0%, transparent 60%)',
             filter: 'blur(60px)',
             borderRadius: '50%',
           }}
@@ -246,7 +250,7 @@ export default function DomeGallery() {
             width: '800px',
             height: '800px',
             transform: 'translate(-50%, -50%)',
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(6, 182, 212, 0) 50%)',
+            background: 'radial-gradient(circle, rgba(0, 168, 255, 0.12) 0%, rgba(0, 168, 255, 0) 50%)',
             filter: 'blur(40px)',
             borderRadius: '50%',
             willChange: 'transform',
@@ -255,8 +259,8 @@ export default function DomeGallery() {
       </div>
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <ScrollFloat subtitle="Meus Projetos" accent={true}>
-          Portfólio de Desenvolvimento
+        <ScrollFloat subtitle={t('portfolio.badge')} accent={true}>
+          {t('portfolio.title')}
         </ScrollFloat>
 
         {/* ScrollStack Viewport / Mobile Grid */}
@@ -284,7 +288,7 @@ export default function DomeGallery() {
             >
               {portfolio.map((item) => (
                 <ScrollStackItem key={item.id} itemClassName="portfolio-card">
-                  <ElectricBorder borderRadius={40} color="#06b6d4" speed={1} chaos={0.12}>
+                  <ElectricBorder borderRadius={40} color="#00a8ff" speed={1} chaos={0.12}>
                     {renderCardContent(item)}
                   </ElectricBorder>
                 </ScrollStackItem>
@@ -307,7 +311,7 @@ export default function DomeGallery() {
               position: 'fixed',
               top: 0,
               left: 0,
-              width: '100vw',
+              width: '100%',
               height: '100vh',
               backgroundColor: 'rgba(10, 10, 10, 0.95)',
               backdropFilter: 'blur(20px)',
@@ -338,7 +342,7 @@ export default function DomeGallery() {
                   zIndex: 9999999,
                   transition: 'all 0.2s ease',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.1)'; e.currentTarget.style.borderColor = '#06b6d4'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.1)'; e.currentTarget.style.borderColor = '#00a8ff'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)'; }}
               >
                 <ChevronLeft size={32} />
@@ -366,7 +370,7 @@ export default function DomeGallery() {
                   zIndex: 9999999,
                   transition: 'all 0.2s ease',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.1)'; e.currentTarget.style.borderColor = '#06b6d4'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.1)'; e.currentTarget.style.borderColor = '#00a8ff'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)'; }}
               >
                 <ChevronRight size={32} />
@@ -384,7 +388,7 @@ export default function DomeGallery() {
                 position: 'relative',
                 borderRadius: '16px',
                 overflow: 'hidden', // Segregado dentro do modal aberto, não afeta o scroll externo
-                border: '1px solid rgba(6, 182, 212, 0.3)',
+                border: '1px solid rgba(0, 168, 255, 0.3)',
                 boxShadow: '0 30px 60px rgba(0, 0, 0, 0.9)',
                 display: 'flex',
                 alignItems: 'center',
@@ -423,10 +427,10 @@ export default function DomeGallery() {
                 }}
               >
                 <div>
-                  <span style={{ color: '#06b6d4', fontSize: '0.85rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600 }}>
+                  <span style={{ color: '#00a8ff', fontSize: '0.85rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600 }}>
                     {selectedImage.categoryName}
                   </span>
-                  <h3 className="modal-title" style={{ fontFamily: "'Cormorant Garamond', serif", color: '#ffffff', margin: '4px 0 0 0' }}>
+                  <h3 className="modal-title" style={{ fontFamily: "'JetBrains Mono', monospace", color: '#ffffff', margin: '4px 0 0 0' }}>
                     {selectedImage.title}
                   </h3>
                 </div>
@@ -443,7 +447,7 @@ export default function DomeGallery() {
                             width: '8px',
                             height: '8px',
                             borderRadius: '50%',
-                            backgroundColor: idx === currentSlideIndex ? '#06b6d4' : 'rgba(255,255,255,0.3)',
+                            backgroundColor: idx === currentSlideIndex ? '#00a8ff' : 'rgba(255,255,255,0.3)',
                             transition: 'background-color 0.3s ease'
                           }}
                         />
@@ -468,15 +472,15 @@ export default function DomeGallery() {
                       transition: 'all 0.3s ease',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = '#06b6d4';
-                      e.currentTarget.style.color = '#06b6d4';
+                      e.currentTarget.style.borderColor = '#00a8ff';
+                      e.currentTarget.style.color = '#00a8ff';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
                       e.currentTarget.style.color = '#ffffff';
                     }}
                   >
-                    Fechar
+                    {t('portfolio.closeModal')}
                   </button>
                 </div>
               </div>
@@ -509,7 +513,7 @@ export default function DomeGallery() {
           display: flex;
           flex-direction: column;
           gap: 2.5rem;
-          padding: 3rem 0;
+          padding: 3rem 0 0 0;
           width: 100%;
         }
         .mobile-card {
@@ -528,7 +532,9 @@ export default function DomeGallery() {
 
         @media (max-width: 768px) {
           .portfolio-card {
-            height: 50vh !important;
+            aspect-ratio: 1 / 1 !important;
+            height: 90vw !important;
+            max-height: 500px !important;
           }
           .portfolio-info-overlay {
             padding: 1.5rem !important;
@@ -563,13 +569,13 @@ export default function DomeGallery() {
           font-family: 'Plus Jakarta Sans', sans-serif;
         }
         .project-action-button.primary {
-          background-color: #06b6d4;
+          background-color: #00a8ff;
           color: #121212;
-          border: 1px solid #06b6d4;
+          border: 1px solid #00a8ff;
         }
         .project-action-button.primary:hover {
           background-color: transparent;
-          color: #06b6d4;
+          color: #00a8ff;
         }
         .project-action-button.secondary {
           background-color: transparent;
@@ -577,9 +583,9 @@ export default function DomeGallery() {
           border: 1px solid rgba(255, 255, 255, 0.3);
         }
         .project-action-button.secondary:hover {
-          border-color: #06b6d4;
-          color: #06b6d4;
-          background-color: rgba(6, 182, 212, 0.1);
+          border-color: #00a8ff;
+          color: #00a8ff;
+          background-color: rgba(0, 168, 255, 0.1);
         }
         .modal-overlay {
           padding: 40px;
@@ -635,7 +641,7 @@ export default function DomeGallery() {
             height: 40px !important;
           }
           .modal-content-wrapper {
-            width: 100vw !important;
+            width: 100% !important;
             height: 100vh !important;
             border-radius: 0 !important;
             border: none !important;

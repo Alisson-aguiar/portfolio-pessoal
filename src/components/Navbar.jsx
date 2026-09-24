@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Camera, Menu, X } from 'lucide-react';
+import { Camera, Menu, X, Globe } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function Navbar({ isVisible }) {
+  const { t, i18n } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,15 +18,20 @@ export default function Navbar({ isVisible }) {
   }, []);
 
   const navLinks = [
-    { label: 'Sobre', href: '#sobre' },
-    { label: 'Serviços', href: '#servicos' },
-    { label: 'Diferenciais', href: '#diferenciais' },
-    { label: 'Portfólio', href: '#portfolio' },
-    { label: 'Destaques', href: '#destaques' },
-    { label: 'Certificações', href: '#certificacoes' },
-    { label: 'Processo', href: '#processo' },
-    // { label: 'Depoimentos', href: '#depoimentos' },
+    { label: t('nav.about'), href: '#sobre' },
+    { label: t('nav.services'), href: '#servicos' },
+    { label: t('nav.differentials'), href: '#diferenciais' },
+    { label: t('nav.portfolio'), href: '#portfolio' },
+    { label: t('nav.highlights'), href: '#destaques' },
+    { label: t('nav.certifications'), href: '#certificacoes' },
+    { label: t('nav.process'), href: '#processo' },
   ];
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    setLangMenuOpen(false);
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header
@@ -37,23 +45,24 @@ export default function Navbar({ isVisible }) {
         opacity: isVisible || isScrolled ? 1 : 0,
         pointerEvents: isVisible || isScrolled ? 'auto' : 'none',
         transform: isVisible || isScrolled ? 'translateY(0)' : 'translateY(-20px)',
+        boxSizing: 'border-box',
+        overflow: 'visible',
       }}
     >
       <nav
-      className='nav-mobile'
+        className='nav-mobile'
         style={{
           width: '100%',
           margin: 0,
-          padding: '14px 5%',
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems: 'center',
+          padding: '14px 0',
+          boxSizing: 'border-box',
           backgroundColor: 'rgba(23, 23, 23, 0.9)',
           backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(6, 182, 212, 0.1)',
+          borderBottom: '1px solid rgba(0, 168, 255, 0.1)',
           boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4)',
         }}
       >
+        <div className="container" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
         {/* Brand Logo */}
         <a
           href="#"
@@ -63,6 +72,7 @@ export default function Navbar({ isVisible }) {
             gap: '10px',
             textDecoration: 'none',
             color: '#ffffff',
+            flexShrink: 0,
           }}
         >
           <img 
@@ -107,45 +117,80 @@ export default function Navbar({ isVisible }) {
           ))}
         </ul>
 
-        {/* Action Button */}
-        <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        {/* Action Button & Language */}
+        <div className="nav-actions" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', alignItems: 'center', gap: '15px', flexShrink: 0, boxSizing: 'border-box', padding: '4px 12px' }}>
+          
+          <div style={{ position: 'relative' }}>
+            <button
+              onClick={() => setLangMenuOpen(!langMenuOpen)}
+              aria-label="Mudar idioma"
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: '#fff',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '6px',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.85rem'
+              }}
+            >
+              <Globe size={18} color="var(--accent)" />
+              {i18n.language.toUpperCase()}
+            </button>
+            {langMenuOpen && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                right: 0,
+                marginTop: '10px',
+                background: 'rgba(23, 23, 23, 0.95)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid var(--accent-border)',
+                borderRadius: '8px',
+                padding: '8px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+                minWidth: '100px',
+                zIndex: 9999
+              }}>
+                <button onClick={() => changeLanguage('pt')} style={{ background: 'none', border: 'none', color: '#fff', padding: '8px', cursor: 'pointer', textAlign: 'left', fontFamily: 'var(--font-sans)', borderRadius: '4px', backgroundColor: i18n.language === 'pt' ? 'rgba(0, 168, 255, 0.1)' : 'transparent' }}>PT</button>
+                <button onClick={() => changeLanguage('en')} style={{ background: 'none', border: 'none', color: '#fff', padding: '8px', cursor: 'pointer', textAlign: 'left', fontFamily: 'var(--font-sans)', borderRadius: '4px', backgroundColor: i18n.language === 'en' ? 'rgba(0, 168, 255, 0.1)' : 'transparent' }}>EN</button>
+                <button onClick={() => changeLanguage('es')} style={{ background: 'none', border: 'none', color: '#fff', padding: '8px', cursor: 'pointer', textAlign: 'left', fontFamily: 'var(--font-sans)', borderRadius: '4px', backgroundColor: i18n.language === 'es' ? 'rgba(0, 168, 255, 0.1)' : 'transparent' }}>ES</button>
+              </div>
+            )}
+          </div>
+
           <a
             href="https://wa.me/558496572500?text=Ol%C3%A1%20Alisson!%20Gostaria%20de%20falar%20sobre%20um%20projeto."
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              padding: '10px 22px',
-              background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
-              color: '#121212',
-              fontSize: '0.8rem',
-              fontWeight: 700,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              borderRadius: '30px',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 4px 15px rgba(6, 182, 212, 0.3)',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.04)')}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+            aria-label="Entrar em contato via WhatsApp"
+            className="nav-contact-btn"
           >
-            Contato
+            {t('nav.contact')}
           </a>
 
           {/* Mobile Hamburger Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="mobile-toggle"
+            aria-label={mobileMenuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"}
+            aria-expanded={mobileMenuOpen}
             style={{
               display: 'none',
               background: 'none',
               border: 'none',
-              color: '#06b6d4',
+              color: '#00a8ff',
               cursor: 'pointer',
             }}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
+        </div>
         </div>
       </nav>
 
@@ -156,7 +201,7 @@ export default function Navbar({ isVisible }) {
             margin: '10px 24px',
             padding: '24px',
             backgroundColor: '#171717',
-            border: '1px solid rgba(6, 182, 212, 0.3)',
+            border: '1px solid rgba(0, 168, 255, 0.3)',
             borderRadius: '20px',
             display: 'flex',
             flexDirection: 'column',
@@ -193,7 +238,7 @@ export default function Navbar({ isVisible }) {
           height: 2px;
           bottom: -2px;
           left: 50%;
-          background-color: #06b6d4;
+          background-color: #00a8ff;
           transition: all 0.3s ease;
           transform: translateX(-50%);
           border-radius: 2px;

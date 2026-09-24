@@ -1,10 +1,10 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function TextPressure({
   text = "Muito prazer, eu sou Gabriel Albuquerque.",
   className = "",
   textColor = "#ffffff",
-  accentColor = "#06b6d4",
+  accentColor = "#00a8ff",
 }) {
   const containerRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
@@ -99,7 +99,7 @@ function PressureChar({ char, index, mousePos, textColor, accentColor }) {
       ref={charRef}
       style={{
         display: 'inline-block',
-        fontFamily: "'Cormorant Garamond', serif",
+        fontFamily: "'JetBrains Mono', monospace",
         fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
         fontWeight: weight,
         color: color,

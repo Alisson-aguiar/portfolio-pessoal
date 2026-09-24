@@ -3,50 +3,39 @@ import { motion } from 'framer-motion';
 import ScrollFloat from './ScrollFloat';
 import { Terminal, Sparkles, Sliders, ShieldCheck, Zap, Compass } from 'lucide-react';
 import DotField from './DotField';
+import { useTranslation } from 'react-i18next';
 
 export default function MagicBento() {
+  const { t } = useTranslation();
+  const diffs = t('differentials.items', { returnObjects: true });
+
   const items = [
     {
-      id: 1,
-      title: 'Mais de 3 Anos de Experiência',
-      subtitle: 'Tradição & Maestria',
-      description: 'Uma trajetória sólida guiada pelo desenvolvimento de interfaces digitais modernas, código limpo e arquitetura escalável.',
+      ...diffs[0],
       icon: Terminal,
       size: 'large', // 2 col span
       accentNum: '01',
     },
     {
-      id: 2,
-      title: 'Low-code & Vibecode',
-      subtitle: 'Desenvolvimento Ágil',
-      description: 'Criação de soluções de rápida implementação e alta eficiência utilizando plataformas Low-code e Vibecode.',
+      ...diffs[1],
       icon: Sparkles,
       size: 'small',
       accentNum: '02',
     },
     {
-      id: 3,
-      title: 'Product UX/UI',
-      subtitle: 'Design Centrado no Usuário',
-      description: 'Prototipagem no Figma focada na experiência do usuário, usabilidade e design estratégico de produtos digitais.',
+      ...diffs[2],
       icon: Sliders,
       size: 'small',
       accentNum: '03',
     },
     {
-      id: 4,
-      title: 'E-commerce de Alta Conversão',
-      subtitle: 'Lojas Virtuais',
-      description: 'Desenvolvimento e customização de lojas robustas utilizando Nuvemshop, Shopify e WooCommerce.',
+      ...diffs[3],
       icon: ShieldCheck,
       size: 'small',
       accentNum: '04',
     },
     {
-      id: 5,
-      title: 'SEO Operacional',
-      subtitle: 'Visibilidade Digital',
-      description: 'Otimização técnica rigorosa para garantir carregamento ultra rápido e excelente rankeamento nos motores de busca.',
+      ...diffs[4],
       icon: Compass,
       size: 'small',
       accentNum: '05',
@@ -66,16 +55,16 @@ export default function MagicBento() {
           cursorRadius={500}
           cursorForce={0.1}
           bulgeOnly
-          gradientFrom="#06b6d4"
-          gradientTo="#0891b2"
+          gradientFrom="#00a8ff"
+          gradientTo="#00509e"
           glowColor="#120F17"
         />
       </div>
       {/* Dark overlay to improve readability of cards over the bright tunnel */}
       <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(12,12,12,0.65)', zIndex: 0 }}></div>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <ScrollFloat subtitle="Padrão de Excelência" accent={true}>
-          Diferenciais Exclusivos
+        <ScrollFloat subtitle={t('differentials.badge')} accent={true}>
+          {t('differentials.title')}
         </ScrollFloat>
 
         <div
@@ -150,12 +139,12 @@ function BentoCard({ item, index }) {
         backdropFilter: 'blur(16px)',
         borderRadius: '24px',
         padding: '36px',
-        border: '1px solid rgba(6, 182, 212, 0.2)',
+        border: '1px solid rgba(0, 168, 255, 0.2)',
         overflow: 'hidden',
         transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease',
         transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
         boxShadow: isHovered
-          ? '0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(6, 182, 212, 0.15)'
+          ? '0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 168, 255, 0.15)'
           : '0 10px 25px rgba(0, 0, 0, 0.3)',
       }}
     >
@@ -167,7 +156,7 @@ function BentoCard({ item, index }) {
           left: 0,
           right: 0,
           bottom: 0,
-          background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(6, 182, 212, 0.16), transparent 70%)`,
+          background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(0, 168, 255, 0.16), transparent 70%)`,
           opacity: isHovered ? 1 : 0,
           transition: 'opacity 0.3s ease',
           pointerEvents: 'none',
@@ -190,24 +179,24 @@ function BentoCard({ item, index }) {
             width: 48,
             height: 48,
             borderRadius: '14px',
-            backgroundColor: 'rgba(6, 182, 212, 0.12)',
-            border: '1px solid rgba(6, 182, 212, 0.35)',
+            backgroundColor: 'rgba(0, 168, 255, 0.12)',
+            border: '1px solid rgba(0, 168, 255, 0.35)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#06b6d4',
+            color: '#00a8ff',
             transition: 'transform 0.3s ease, background-color 0.3s ease',
             transform: isHovered ? 'scale(1.08)' : 'scale(1)',
           }}
         >
-          <Icon size={22} color="#06b6d4" />
+          <Icon size={22} color="#00a8ff" />
         </div>
 
         <span
           style={{
-            fontFamily: "'Cinzel', serif",
+            fontFamily: "'JetBrains Mono', monospace",
             fontSize: '1.2rem',
-            color: 'rgba(6, 182, 212, 0.35)',
+            color: 'rgba(0, 168, 255, 0.35)',
             fontWeight: 700,
           }}
         >
@@ -220,7 +209,7 @@ function BentoCard({ item, index }) {
         <p
           style={{
             fontSize: '0.8rem',
-            color: '#06b6d4',
+            color: '#00a8ff',
             letterSpacing: '0.15em',
             textTransform: 'uppercase',
             fontWeight: 600,
@@ -232,7 +221,7 @@ function BentoCard({ item, index }) {
 
         <h3
           style={{
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: "'JetBrains Mono', monospace",
             fontSize: 'clamp(1.5rem, 2.2vw, 1.9rem)',
             fontWeight: 400,
             color: '#ffffff',

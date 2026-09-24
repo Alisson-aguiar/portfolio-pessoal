@@ -2,63 +2,14 @@ import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { gsap } from 'gsap';
 import './Certifications.css';
 import ScrollFloat from './ScrollFloat';
+import { useTranslation } from 'react-i18next';
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
-const DEFAULT_GLOW_COLOR = '6, 182, 212';
+const DEFAULT_GLOW_COLOR = '0, 168, 255';
 const MOBILE_BREAKPOINT = 768;
 
-const cardData = [
-  {
-    color: '#1c1c1c',
-    title: 'AZ-900: Microsoft Azure Fundamentals',
-    description: 'Conceitos básicos de nuvem, serviços do Azure, cargas de trabalho, segurança e privacidade.',
-    label: 'Microsoft',
-    link: 'https://learn.microsoft.com/pt-br/credentials/certifications/azure-fundamentals/'
-  },
-  {
-    color: '#1c1c1c',
-    title: 'DP-900: Azure Data Fundamentals',
-    description: 'Conceitos principais de dados relacionais e não relacionais, e serviços de dados no Microsoft Azure.',
-    label: 'Microsoft',
-    link: 'https://learn.microsoft.com/pt-br/credentials/certifications/azure-data-fundamentals/'
-  },
-  {
-    color: '#1c1c1c',
-    title: 'AI-900: Azure AI Fundamentals',
-    description: 'Conceitos fundamentais de aprendizado de máquina (ML) e inteligência artificial (IA) no Azure.',
-    label: 'Microsoft',
-    link: 'https://learn.microsoft.com/pt-br/credentials/certifications/azure-ai-fundamentals/'
-  },
-  {
-    color: '#1c1c1c',
-    title: 'SC-900: Security, Compliance, and Identity',
-    description: 'Conceitos de segurança, conformidade e identidade (SCI) em ambientes de nuvem da Microsoft.',
-    label: 'Microsoft',
-    link: 'https://learn.microsoft.com/pt-br/credentials/certifications/security-compliance-and-identity-fundamentals/'
-  },
-  {
-    color: '#1c1c1c',
-    title: 'PL-900: Power Platform Fundamentals',
-    description: 'Valor de negócios e recursos dos componentes fundamentais da Microsoft Power Platform.',
-    label: 'Microsoft',
-    link: 'https://learn.microsoft.com/pt-br/credentials/certifications/power-platform-fundamentals/'
-  },
-  {
-    color: '#1c1c1c',
-    title: 'MS-900: Microsoft 365 Fundamentals',
-    description: 'Benefícios e opções de soluções em nuvem no Microsoft 365, além de segurança e conformidade.',
-    label: 'Microsoft',
-    link: 'https://learn.microsoft.com/pt-br/credentials/certifications/microsoft-365-fundamentals/'
-  },
-  {
-    color: '#1c1c1c',
-    title: 'Introduction to Software Testing',
-    description: 'Princípios, terminologias e metodologias de teste de software para garantir qualidade em aplicações.',
-    label: 'Simplilearn',
-    link: 'https://lms.simplilearn.com/'
-  }
-];
+// cardData moved inside component
 
 const createParticleElement = (x, y, color = DEFAULT_GLOW_COLOR) => {
   const el = document.createElement('div');
@@ -501,6 +452,60 @@ export default function Certifications({
   clickEffect = true,
   enableMagnetism = false
 }) {
+  const { t } = useTranslation();
+  
+  const cardData = [
+    {
+      color: '#1c1c1c',
+      title: 'AZ-900: Microsoft Azure Fundamentals',
+      description: t('certifications.items.az900', 'Conceitos básicos de nuvem, serviços do Azure, cargas de trabalho, segurança e privacidade.'),
+      label: 'Microsoft',
+      link: 'https://learn.microsoft.com/pt-br/credentials/certifications/azure-fundamentals/'
+    },
+    {
+      color: '#1c1c1c',
+      title: 'DP-900: Azure Data Fundamentals',
+      description: t('certifications.items.dp900', 'Conceitos principais de dados relacionais e não relacionais, e serviços de dados no Microsoft Azure.'),
+      label: 'Microsoft',
+      link: 'https://learn.microsoft.com/pt-br/credentials/certifications/azure-data-fundamentals/'
+    },
+    {
+      color: '#1c1c1c',
+      title: 'AI-900: Azure AI Fundamentals',
+      description: t('certifications.items.ai900', 'Conceitos fundamentais de aprendizado de máquina (ML) e inteligência artificial (IA) no Azure.'),
+      label: 'Microsoft',
+      link: 'https://learn.microsoft.com/pt-br/credentials/certifications/azure-ai-fundamentals/'
+    },
+    {
+      color: '#1c1c1c',
+      title: 'SC-900: Security, Compliance, and Identity',
+      description: t('certifications.items.sc900', 'Conceitos de segurança, conformidade e identidade (SCI) em ambientes de nuvem da Microsoft.'),
+      label: 'Microsoft',
+      link: 'https://learn.microsoft.com/pt-br/credentials/certifications/security-compliance-and-identity-fundamentals/'
+    },
+    {
+      color: '#1c1c1c',
+      title: 'PL-900: Power Platform Fundamentals',
+      description: t('certifications.items.pl900', 'Valor de negócios e recursos dos componentes fundamentais da Microsoft Power Platform.'),
+      label: 'Microsoft',
+      link: 'https://learn.microsoft.com/pt-br/credentials/certifications/power-platform-fundamentals/'
+    },
+    {
+      color: '#1c1c1c',
+      title: 'MS-900: Microsoft 365 Fundamentals',
+      description: t('certifications.items.ms900', 'Benefícios e opções de soluções em nuvem no Microsoft 365, além de segurança e conformidade.'),
+      label: 'Microsoft',
+      link: 'https://learn.microsoft.com/pt-br/credentials/certifications/microsoft-365-fundamentals/'
+    },
+    {
+      color: '#1c1c1c',
+      title: 'Introduction to Software Testing',
+      description: t('certifications.items.testing', 'Princípios, terminologias e metodologias de teste de software para garantir qualidade em aplicações.'),
+      label: 'Simplilearn',
+      link: 'https://lms.simplilearn.com/'
+    }
+  ];
+
   const gridRef = useRef(null);
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
@@ -508,8 +513,8 @@ export default function Certifications({
   return (
     <section id="certificacoes" className="section-spacing certifications-section" style={{ backgroundColor: '#121212', position: 'relative' }}>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <ScrollFloat subtitle="Formação Contínua" accent={true}>
-          Certificações em Andamento
+        <ScrollFloat subtitle={t('certifications.badge', 'Formação Contínua')} accent={true}>
+          {t('certifications.title', 'Certificações em Andamento')}
         </ScrollFloat>
         
         <div style={{ marginTop: '40px', position: 'relative' }}>

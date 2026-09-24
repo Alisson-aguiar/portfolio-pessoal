@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Renderer, Program, Mesh, Triangle } from 'ogl';
 import './LightTunnel.css';
 
@@ -140,8 +140,8 @@ void main() {
 const ctxMap = new WeakMap();
 
 const LightTunnel = ({
-  cableColor = '#06b6d4',
-  pulseColor = '#06b6d4',
+  cableColor = '#00a8ff',
+  pulseColor = '#00a8ff',
   tunnelColor = '#5227FF',
   tunnelOpacity = 0,
   speed = 0.1,

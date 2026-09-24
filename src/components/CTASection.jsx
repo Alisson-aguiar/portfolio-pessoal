@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ScrollVelocity from './ScrollVelocity';
 import InfiniteSpiral from './InfiniteSpiral';
 import { MessageSquare, Calendar, Send, X, CheckCircle2, Phone, Mail, ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const spiralImages = [
   { src: '/destaques/dev-toolkit.jpg', alt: 'Dev Toolkit' },
@@ -14,6 +15,7 @@ const spiralImages = [
 ];
 
 export default function CTASection() {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -67,8 +69,8 @@ export default function CTASection() {
       </div>
 
       {/* Dynamic Infinite Scroll Velocity Banner */}
-      <div style={{ position: 'relative', zIndex: 1, borderTop: '1px solid rgba(6, 182, 212, 0.2)', borderBottom: '1px solid rgba(6, 182, 212, 0.2)', marginBottom: '80px' }}>
-        <ScrollVelocity text="Vamos criar o seu próximo projeto digital?" baseVelocity={4} />
+      <div style={{ position: 'relative', zIndex: 1, borderTop: '1px solid rgba(0, 168, 255, 0.2)', borderBottom: '1px solid rgba(0, 168, 255, 0.2)', marginBottom: '80px' }}>
+        <ScrollVelocity text={t('cta.banner')} baseVelocity={4} />
       </div>
 
       <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
@@ -89,7 +91,7 @@ export default function CTASection() {
               marginBottom: '48px',
             }}
           >
-            Entre em contato e vamos conversar sobre como posso ajudar a tirar a sua ideia do papel e transformá-la em uma plataforma digital de sucesso.
+            {t('cta.description')}
           </p>
 
           {/* Action Buttons */}
@@ -110,13 +112,13 @@ export default function CTASection() {
             </button> */}
 
             <a
-              href="https://wa.me/558496572500?text=Ol%C3%A1%20Alisson!%20Gostaria%20de%20falar%20sobre%20um%20projeto."
+              href={`https://wa.me/558496572500?text=${t('cta.wa_message')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary"
             >
-              <MessageSquare size={18} color="#06b6d4" />
-              <span>Falar pelo WhatsApp</span>
+              <MessageSquare size={18} color="#00a8ff" />
+              <span>{t('cta.btn_whatsapp')}</span>
             </a>
           </div>
         </motion.div>
@@ -134,7 +136,7 @@ export default function CTASection() {
               position: 'fixed',
               top: 0,
               left: 0,
-              width: '100vw',
+              width: '100%',
               height: '100vh',
               backgroundColor: 'rgba(10, 10, 10, 0.9)',
               backdropFilter: 'blur(16px)',
@@ -153,7 +155,7 @@ export default function CTASection() {
               style={{
                 backgroundColor: '#1c1c1c',
                 borderRadius: '24px',
-                border: '1px solid rgba(6, 182, 212, 0.4)',
+                border: '1px solid rgba(0, 168, 255, 0.4)',
                 padding: '40px',
                 maxWidth: 580,
                 width: '100%',
@@ -180,8 +182,8 @@ export default function CTASection() {
 
               {formSubmitted ? (
                 <div style={{ textAlign: 'center', padding: '40px 0' }}>
-                  <CheckCircle2 size={56} color="#06b6d4" style={{ margin: '0 auto 20px' }} />
-                  <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '2rem', color: '#ffffff', marginBottom: '12px' }}>
+                  <CheckCircle2 size={56} color="#00a8ff" style={{ margin: '0 auto 20px' }} />
+                  <h3 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '2rem', color: '#ffffff', marginBottom: '12px' }}>
                     Solicitação Encaminhada!
                   </h3>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
@@ -191,17 +193,17 @@ export default function CTASection() {
               ) : (
                 <>
                   <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                    <span style={{ fontSize: '0.75rem', color: '#06b6d4', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 600 }}>
+                    <span style={{ fontSize: '0.75rem', color: '#00a8ff', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 600 }}>
                       Desenvolvimento Web
                     </span>
-                    <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '2.2rem', color: '#ffffff', marginTop: '6px' }}>
+                    <h3 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '2.2rem', color: '#ffffff', marginTop: '6px' }}>
                       Iniciar Projeto
                     </h3>
                   </div>
 
                   <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.85rem', color: '#06b6d4', marginBottom: '6px' }}>Nome Completo</label>
+                      <label style={{ display: 'block', fontSize: '0.85rem', color: '#00a8ff', marginBottom: '6px' }}>Nome Completo</label>
                       <input
                         type="text"
                         required
@@ -212,7 +214,7 @@ export default function CTASection() {
                           width: '100%',
                           padding: '14px 18px',
                           backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                          border: '1px solid rgba(6, 182, 212, 0.3)',
+                          border: '1px solid rgba(0, 168, 255, 0.3)',
                           borderRadius: '12px',
                           color: '#ffffff',
                           fontFamily: 'inherit',
@@ -223,7 +225,7 @@ export default function CTASection() {
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#06b6d4', marginBottom: '6px' }}>E-mail</label>
+                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#00a8ff', marginBottom: '6px' }}>E-mail</label>
                         <input
                           type="email"
                           required
@@ -234,7 +236,7 @@ export default function CTASection() {
                             width: '100%',
                             padding: '14px 18px',
                             backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                            border: '1px solid rgba(6, 182, 212, 0.3)',
+                            border: '1px solid rgba(0, 168, 255, 0.3)',
                             borderRadius: '12px',
                             color: '#ffffff',
                             fontFamily: 'inherit',
@@ -243,7 +245,7 @@ export default function CTASection() {
                         />
                       </div>
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#06b6d4', marginBottom: '6px' }}>WhatsApp</label>
+                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#00a8ff', marginBottom: '6px' }}>WhatsApp</label>
                         <input
                           type="tel"
                           required
@@ -254,7 +256,7 @@ export default function CTASection() {
                             width: '100%',
                             padding: '14px 18px',
                             backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                            border: '1px solid rgba(6, 182, 212, 0.3)',
+                            border: '1px solid rgba(0, 168, 255, 0.3)',
                             borderRadius: '12px',
                             color: '#ffffff',
                             fontFamily: 'inherit',
@@ -266,7 +268,7 @@ export default function CTASection() {
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#06b6d4', marginBottom: '6px' }}>Tipo de Projeto</label>
+                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#00a8ff', marginBottom: '6px' }}>Tipo de Projeto</label>
                         <select
                           value={formData.service}
                           onChange={(e) => setFormData({ ...formData, service: e.target.value })}
@@ -274,7 +276,7 @@ export default function CTASection() {
                             width: '100%',
                             padding: '14px 18px',
                             backgroundColor: '#1c1c1c',
-                            border: '1px solid rgba(6, 182, 212, 0.3)',
+                            border: '1px solid rgba(0, 168, 255, 0.3)',
                             borderRadius: '12px',
                             color: '#ffffff',
                             fontFamily: 'inherit',
@@ -289,7 +291,7 @@ export default function CTASection() {
                         </select>
                       </div>
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#06b6d4', marginBottom: '6px' }}>Prazo Estimado</label>
+                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#00a8ff', marginBottom: '6px' }}>Prazo Estimado</label>
                         <input
                           type="date"
                           value={formData.date}
@@ -298,7 +300,7 @@ export default function CTASection() {
                             width: '100%',
                             padding: '14px 18px',
                             backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                            border: '1px solid rgba(6, 182, 212, 0.3)',
+                            border: '1px solid rgba(0, 168, 255, 0.3)',
                             borderRadius: '12px',
                             color: '#ffffff',
                             fontFamily: 'inherit',
@@ -309,7 +311,7 @@ export default function CTASection() {
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.85rem', color: '#06b6d4', marginBottom: '6px' }}>Detalhes do Projeto</label>
+                      <label style={{ display: 'block', fontSize: '0.85rem', color: '#00a8ff', marginBottom: '6px' }}>Detalhes do Projeto</label>
                       <textarea
                         rows={3}
                         value={formData.message}
@@ -319,7 +321,7 @@ export default function CTASection() {
                           width: '100%',
                           padding: '14px 18px',
                           backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                          border: '1px solid rgba(6, 182, 212, 0.3)',
+                          border: '1px solid rgba(0, 168, 255, 0.3)',
                           borderRadius: '12px',
                           color: '#ffffff',
                           fontFamily: 'inherit',

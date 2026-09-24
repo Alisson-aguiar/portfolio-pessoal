@@ -1,11 +1,27 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CircularText from './CircularText';
 import { Calendar, Briefcase } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function HeroVideo({ onVideoComplete }) {
+  const { t } = useTranslation();
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      onVideoComplete?.(true);
+      return;
+    }
+
     let active = true;
 
     const canvas = document.getElementById('video-canvas');
@@ -37,10 +53,17 @@ export default function HeroVideo({ onVideoComplete }) {
           if (!active) return;
           imagesLoaded++;
 
-          if (imagesLoaded === 1) {
+          if (i === 1) {
             canvas.width = img.naturalWidth;
             canvas.height = img.naturalHeight;
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            
+            // Força a renderização do frame correto
+            // dependendo de onde o usuário está na página
+            if (typeof handleScroll === 'function') {
+              handleScroll();
+            } else {
+              ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            }
           }
         };
       }
@@ -100,7 +123,7 @@ export default function HeroVideo({ onVideoComplete }) {
             }
           });
 
-          // Show end banner
+          // Show end banner and cards
           const endCards = document.getElementById('video-end-cards');
           if (frameIndex >= 137) {
              if (endBanner) endBanner.classList.add('visible');
@@ -159,7 +182,113 @@ export default function HeroVideo({ onVideoComplete }) {
       window.removeEventListener('resize', handleResize);
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [onVideoComplete]);
+  }, [onVideoComplete, isMobile]);
+
+  const bannerContent = (
+    <>
+      <div className="banner-actions banner-mobile"
+        style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
+
+        <div className='mobile-hj'  style={{ position: 'relative', width: 90, height: 90, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ position: 'absolute', fontFamily: "'JetBrains Mono', monospace", fontSize: '26px', fontWeight: '100', color: '#00a8ff', zIndex: 2 }}>
+            AA
+          </div>
+          <div style={{ position: 'absolute', transform: 'scale(0.45)', transformOrigin: 'center', fontWeight: '100', }}>
+            <CircularText text="ALISSON AGUIAR • " spinDuration={20} className="" onHover="speedUp" />
+          </div>
+        </div>
+
+        <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '12px',
+            padding: '8px 20px',
+            borderRadius: '30px',
+            backgroundColor: 'rgba(0, 168, 255, 0.08)',
+            border: '1px solid rgba(0, 168, 255, 0.35)',
+          }}
+        >
+          <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#00a8ff', boxShadow: '0 0 10px #00a8ff' }} />
+          <span className='mobile-bagde-photo' style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.85rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#00a8ff', fontWeight: 600 }}>
+            {t('hero.badge')}
+          </span>
+        </div>
+
+      </div>
+
+      <div className='mobile-main' style={{ position: 'relative', zIndex: 1, padding: '10px 0' }}>
+        <h1 className='title-main' style={{
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+          fontWeight: 100,
+          color: '#ffffff',
+          lineHeight: 1.1,
+          marginBottom: '16px',
+          textShadow: '0 4px 20px rgba(0,0,0,0.4)',
+          maxWidth: '700px',
+          width: '100%',
+        }}>
+          {t('hero.title1')}<span style={{color: '#00a8ff'}}>{t('hero.title2')}</span>{t('hero.title3')}
+        </h1>
+        <p style={{
+          fontFamily: "'Inter', sans-serif",
+          fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
+          color: 'rgba(255,255,255,0.75)',
+          maxWidth: '700px',
+          lineHeight: 1.6,
+          fontWeight: 300,
+          textShadow: '0 2px 10px rgba(0,0,0,0.4)'
+        }}>
+          {t('hero.subtitle')}
+        </p>
+      </div>
+
+      <div className="banner-actions"
+        style={{ display: 'flex', gap: '20px', marginTop: '24px', position: 'relative', zIndex: 2, flexWrap: 'wrap' }}>
+        <a href="#portfolio" aria-label="Ver Projetos no Portfólio" className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Briefcase size={18} />
+          <span>{t('hero.btnProjects')}</span>
+        </a>
+
+        <a 
+          href="https://wa.me/558496572500?text=Ol%C3%A1%20Alisson!%20Gostaria%20de%20falar%20sobre%20um%20projeto." 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          aria-label="Iniciar Projeto via WhatsApp"
+          className="btn-secondary" 
+          style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+        >
+          <Calendar size={18} />
+          <span>{t('hero.btnContact')}</span>
+        </a>
+      </div>
+    </>
+  );
+
+  if (isMobile) {
+    return (
+      <div id="video-section-mobile" style={{
+        position: 'relative',
+        width: '100%',
+        height: '100vh',
+        minHeight: '600px',
+        backgroundImage: 'url(/frames/frame_0143.webp)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden'
+      }}>
+        {/* Camada de escurecimento para dar contraste ao texto */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)' }} />
+        
+        <div id="video-end-banner" className="visible" style={{ position: 'relative', opacity: 1, pointerEvents: 'auto', transform: 'none', left: '0', top: '0', width: '100%', padding: '0 24px', zIndex: 2 }}>
+          {bannerContent}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div id="video-section" ref={containerRef}>
@@ -168,129 +297,47 @@ export default function HeroVideo({ onVideoComplete }) {
 
         <div id="scroll-indicator" className="scroll-indicator">
           <div className="mouse"></div>
-          <p>Role para explorar</p>
+          <p>{t('hero.scrollDown')}</p>
         </div>
 
         <div id="scroll-cards-container">
-          <div className="scroll-card card-top-left" data-start="0.05" data-end="0.35">
-            <h3>Código Limpo & Escalável</h3>
-            <p>Desenvolvimento focado em manutenibilidade, alta performance e boas práticas de engenharia de software.</p>
+          <div className="scroll-card card-top-left" data-start="0.05" data-end="0.45">
+            <h3>{t('hero.cards.cleanCodeTitle')}</h3>
+            <p>{t('hero.cards.cleanCodeDesc')}</p>
           </div>
           
-          <div className="scroll-card card-bottom-left" data-start="0.25" data-end="0.55">
-            <h3>Arquitetura Moderna</h3>
-            <p>Construção de aplicações robustas utilizando as tecnologias mais avançadas e eficientes do ecossistema.</p>
+          <div className="scroll-card card-bottom-left" data-start="0.35" data-end="0.75">
+            <h3>{t('hero.cards.architectureTitle')}</h3>
+            <p>{t('hero.cards.architectureDesc')}</p>
           </div>
           
-          <div className="scroll-card card-top-right" data-start="0.15" data-end="0.45">
-            <h3>Foco no Usuário (UX/UI)</h3>
-            <p>Interfaces intuitivas, responsivas e experiências fluidas projetadas para engajar e converter.</p>
+          <div className="scroll-card card-top-right" data-start="0.20" data-end="0.60">
+            <h3>{t('hero.cards.uxuiTitle')}</h3>
+            <p>{t('hero.cards.uxuiDesc')}</p>
           </div>
           
-          <div className="scroll-card card-bottom-right" data-start="0.35" data-end="0.70">
-            <h3>Entrega de Valor</h3>
-            <p>Transformando desafios complexos de negócio em soluções tecnológicas eficientes e inovadoras.</p>
+          <div className="scroll-card card-bottom-right" data-start="0.50" data-end="0.90">
+            <h3>{t('hero.cards.valueTitle')}</h3>
+            <p>{t('hero.cards.valueDesc')}</p>
           </div>
         </div>
 
-        {/* 
-            Banner Final
-            O ParticleText e CircularText do React Bits estão embutidos aqui 
-            de forma passiva, fluindo naturalmente com a opacidade gerada 
-            pela classe .visible controlada pelo scroll.
-        */}
         <div id="video-end-banner">
-          {/* <div className="banner-actions banner-mobile" style={{ marginBottom: '32px', display: 'flex', alignItems: 'center', gap: '24px' }}> */}
-          <div className="banner-actions banner-mobile"
-            style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
-
-            <div className='mobile-hj'  style={{ position: 'relative', width: 90, height: 90, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ position: 'absolute', fontFamily: "'Cinzel', serif", fontSize: '26px', fontWeight: '100', color: '#06b6d4', zIndex: 2 }}>
-                AA
-              </div>
-              <div style={{ position: 'absolute', transform: 'scale(0.45)', transformOrigin: 'center', fontWeight: '100', }}>
-                <CircularText text="ALISSON AGUIAR • " spinDuration={20} className="" onHover="speedUp" />
-              </div>
-            </div>
-
-            <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '12px',
-                padding: '8px 20px',
-                borderRadius: '30px',
-                backgroundColor: 'rgba(6, 182, 212, 0.08)',
-                border: '1px solid rgba(6, 182, 212, 0.35)',
-              }}
-            >
-              <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#06b6d4', boxShadow: '0 0 10px #06b6d4' }} />
-              <span className='mobile-bagde-photo' style={{ fontFamily: "'Cinzel', serif", fontSize: '0.85rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#06b6d4', fontWeight: 600 }}>
-                Alisson Aguiar • Desenvolvedor
-              </span>
-            </div>
-
-          </div>
-
-          <div className='mobile-main' style={{ position: 'relative', zIndex: 1, padding: '10px 0' }}>
-            <h1 className='title-main' style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-              fontWeight: 100,
-              color: '#ffffff',
-              lineHeight: 1.1,
-              marginBottom: '16px',
-              textShadow: '0 4px 20px rgba(0,0,0,0.4)',
-              maxWidth: '700px',
-              width: '100%',
-            }}>
-              Transformando ideias complexas em <span style={{color: '#06b6d4'}}>interfaces digitais modernas</span>.
-            </h1>
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
-              color: 'rgba(255,255,255,0.75)',
-              maxWidth: '700px',
-              lineHeight: 1.6,
-              fontWeight: 300,
-              textShadow: '0 2px 10px rgba(0,0,0,0.4)'
-            }}>
-              Desenvolvedor Full Stack e Web Designer focado em alta performance e UX/UI.
-            </p>
-          </div>
-
-          {/* <div className="banner-actions" style={{ display: 'flex', gap: '20px', marginTop: '40px', position: 'relative', zIndex: 2 }}> */}
-          <div className="banner-actions"
-            style={{ display: 'flex', gap: '20px', marginTop: '24px', position: 'relative', zIndex: 2, flexWrap: 'wrap' }}>
-            <a href="#portfolio" className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Briefcase size={18} />
-              <span>Ver Projetos</span>
-            </a>
-
-            <a 
-              href="https://wa.me/558496572500?text=Ol%C3%A1%20Alisson!%20Gostaria%20de%20falar%20sobre%20um%20projeto." 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn-secondary" 
-              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-            >
-              <Calendar size={18} />
-              <span>Iniciar Projeto</span>
-            </a>
-          </div>
+          {bannerContent}
         </div>
-
-        <div id="video-end-cards" className="desktop-only">
+        
+        <div id="video-end-cards">
           <div className="highlight-card">
-            <h4>+3 Anos</h4>
-            <p>de Experiência em Desenvolvimento</p>
+            <h4>{t('hero.highlights.expTitle')}</h4>
+            <p>{t('hero.highlights.expDesc')}<strong>{t('hero.highlights.expStrong1')}</strong>{t('hero.highlights.expDiv')}<strong>{t('hero.highlights.expStrong2')}</strong></p>
           </div>
           <div className="highlight-card">
-            <h4>Full Stack</h4>
-            <p>React, Node.js, PHP, e muito mais</p>
+            <h4>{t('hero.highlights.fullStackTitle')}</h4>
+            <p>{t('hero.highlights.fullStackDesc')}</p>
           </div>
           <div className="highlight-card">
-            <h4>UX/UI</h4>
-            <p>Foco em interfaces intuitivas e alta conversão</p>
+            <h4>{t('hero.highlights.uxuiTitle')}</h4>
+            <p>{t('hero.highlights.uxuiDesc')}</p>
           </div>
         </div>
       </div>

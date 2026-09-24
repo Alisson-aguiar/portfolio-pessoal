@@ -106,7 +106,7 @@ export default function PixelSwapTestimonials() {
           ctx.drawImage(nextImg, bx, by, blockSize, blockSize, bx, by, blockSize, blockSize);
 
           // Add gold pixel edge highlight
-          ctx.strokeStyle = 'rgba(6, 182, 212, 0.4)';
+          ctx.strokeStyle = 'rgba(0, 168, 255, 0.4)';
           ctx.strokeRect(bx, by, blockSize, blockSize);
         }
       }
@@ -139,7 +139,7 @@ export default function PixelSwapTestimonials() {
             backgroundColor: 'rgba(28, 28, 28, 0.7)',
             backdropFilter: 'blur(20px)',
             borderRadius: '28px',
-            border: '1px solid rgba(6, 182, 212, 0.25)',
+            border: '1px solid rgba(0, 168, 255, 0.25)',
             padding: '50px',
             display: 'grid',
             gridTemplateColumns: '380px 1fr',
@@ -158,7 +158,7 @@ export default function PixelSwapTestimonials() {
               width: '100%',
               borderRadius: '20px',
               overflow: 'hidden',
-              border: '1px solid rgba(6, 182, 212, 0.35)',
+              border: '1px solid rgba(0, 168, 255, 0.35)',
               boxShadow: '0 15px 35px rgba(0, 0, 0, 0.7)',
             }}
           >
@@ -196,18 +196,18 @@ export default function PixelSwapTestimonials() {
                 background: 'rgba(23, 23, 23, 0.85)',
                 backdropFilter: 'blur(10px)',
                 borderRadius: '12px',
-                border: '1px solid rgba(6, 182, 212, 0.25)',
+                border: '1px solid rgba(0, 168, 255, 0.25)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}
             >
-              <span style={{ fontSize: '0.75rem', color: '#06b6d4', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '0.75rem', color: '#00a8ff', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                 Pixel Swap Art
               </span>
               <div style={{ display: 'flex', gap: 4 }}>
                 {[...Array(current.rating)].map((_, i) => (
-                  <Star key={i} size={13} fill="#06b6d4" color="#06b6d4" />
+                  <Star key={i} size={13} fill="#00a8ff" color="#00a8ff" />
                 ))}
               </div>
             </div>
@@ -215,7 +215,7 @@ export default function PixelSwapTestimonials() {
 
           {/* Right: Testimonial Text */}
           <div style={{ position: 'relative' }}>
-            <Quote size={48} color="#06b6d4" style={{ opacity: 0.4, marginBottom: '20px' }} />
+            <Quote size={48} color="#00a8ff" style={{ opacity: 0.4, marginBottom: '20px' }} />
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -227,7 +227,7 @@ export default function PixelSwapTestimonials() {
               >
                 <p
                   style={{
-                    fontFamily: "'Cormorant Garamond', serif",
+                    fontFamily: "'JetBrains Mono', monospace",
                     fontSize: 'clamp(1.4rem, 2.2vw, 1.85rem)',
                     lineHeight: 1.5,
                     color: '#ffffff',
@@ -242,7 +242,7 @@ export default function PixelSwapTestimonials() {
                 <div>
                   <h4
                     style={{
-                      fontFamily: "'Cinzel', serif",
+                      fontFamily: "'JetBrains Mono', monospace",
                       fontSize: '1.2rem',
                       letterSpacing: '0.08em',
                       color: '#ffffff',
@@ -253,7 +253,7 @@ export default function PixelSwapTestimonials() {
                   </h4>
                   <p
                     style={{
-                      color: '#06b6d4',
+                      color: '#00a8ff',
                       fontSize: '0.85rem',
                       letterSpacing: '0.12em',
                       textTransform: 'uppercase',
@@ -281,7 +281,7 @@ export default function PixelSwapTestimonials() {
                   height: 46,
                   borderRadius: '50%',
                   backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(6, 182, 212, 0.3)',
+                  border: '1px solid rgba(0, 168, 255, 0.3)',
                   color: '#ffffff',
                   display: 'flex',
                   alignItems: 'center',
@@ -290,7 +290,7 @@ export default function PixelSwapTestimonials() {
                   transition: 'all 0.3s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#06b6d4';
+                  e.currentTarget.style.backgroundColor = '#00a8ff';
                   e.currentTarget.style.color = '#121212';
                 }}
                 onMouseLeave={(e) => {
@@ -309,7 +309,7 @@ export default function PixelSwapTestimonials() {
                   height: 46,
                   borderRadius: '50%',
                   backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(6, 182, 212, 0.3)',
+                  border: '1px solid rgba(0, 168, 255, 0.3)',
                   color: '#ffffff',
                   display: 'flex',
                   alignItems: 'center',
@@ -318,7 +318,7 @@ export default function PixelSwapTestimonials() {
                   transition: 'all 0.3s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#06b6d4';
+                  e.currentTarget.style.backgroundColor = '#00a8ff';
                   e.currentTarget.style.color = '#121212';
                 }}
                 onMouseLeave={(e) => {

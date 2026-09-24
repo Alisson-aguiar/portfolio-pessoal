@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 export default function ScrollFloat({
@@ -68,7 +68,7 @@ export default function ScrollFloat({
             fontSize: '0.85rem',
             letterSpacing: '0.3em',
             textTransform: 'uppercase',
-            color: '#06b6d4',
+            color: '#00a8ff',
             marginBottom: '12px',
             fontWeight: 600,
           }}
@@ -95,7 +95,7 @@ export default function ScrollFloat({
             variants={itemVariants}
             style={{
               display: 'inline-block',
-              fontFamily: "'Cormorant Garamond', serif",
+              fontFamily: "'JetBrains Mono', monospace",
               fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
               fontWeight: 300,
               letterSpacing: '0.2em',
@@ -116,7 +116,7 @@ export default function ScrollFloat({
           style={{
             width: 80,
             height: 2,
-            background: 'linear-gradient(90deg, transparent, #06b6d4, transparent)',
+            background: 'linear-gradient(90deg, transparent, #00a8ff, transparent)',
             margin: align === 'center' ? '20px auto 0' : '20px 0 0',
             transformOrigin: align === 'center' ? 'center' : 'left',
           }}

@@ -2,35 +2,38 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import ScrollFloat from './ScrollFloat';
 import { Search, PenTool, Code, Rocket, CheckCircle2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function ProcessSection() {
+  const { t } = useTranslation();
+
   const steps = [
     {
       num: '01',
-      title: 'Discovery & Requisitos',
-      subtitle: 'Entendimento do Negócio',
-      description: 'Reunião inicial para compreender as necessidades, alinhar expectativas e definir o escopo ideal para o seu projeto.',
+      title: t('process.steps.0.title', 'Discovery & Requisitos'),
+      subtitle: t('process.steps.0.subtitle', 'Entendimento do Negócio'),
+      description: t('process.steps.0.description', 'Reunião inicial para compreender as necessidades, alinhar expectativas e definir o escopo ideal para o seu projeto.'),
       icon: Search,
     },
     {
       num: '02',
-      title: 'Design & Arquitetura',
-      subtitle: 'Planejamento Estratégico',
-      description: 'Criação de protótipos (UI/UX), escolha das melhores tecnologias e estruturação da arquitetura do sistema.',
+      title: t('process.steps.1.title', 'Design & Arquitetura'),
+      subtitle: t('process.steps.1.subtitle', 'Planejamento Estratégico'),
+      description: t('process.steps.1.description', 'Criação de protótipos (UI/UX), escolha das melhores tecnologias e estruturação da arquitetura do sistema.'),
       icon: PenTool,
     },
     {
       num: '03',
-      title: 'Desenvolvimento',
-      subtitle: 'Código & Engenharia',
-      description: 'Construção do software com código limpo, responsivo e escalável, aplicando as melhores práticas do mercado.',
+      title: t('process.steps.2.title', 'Desenvolvimento'),
+      subtitle: t('process.steps.2.subtitle', 'Código & Engenharia'),
+      description: t('process.steps.2.description', 'Construção do software com código limpo, responsivo e escalável, aplicando as melhores práticas do mercado.'),
       icon: Code,
     },
     {
       num: '04',
-      title: 'Entrega & Deploy',
-      subtitle: 'Lançamento ao Mundo',
-      description: 'Testes rigorosos, publicação em ambiente de produção e suporte contínuo para garantir estabilidade e sucesso.',
+      title: t('process.steps.3.title', 'Entrega & Deploy'),
+      subtitle: t('process.steps.3.subtitle', 'Lançamento ao Mundo'),
+      description: t('process.steps.3.description', 'Testes rigorosos, publicação em ambiente de produção e suporte contínuo para garantir estabilidade e sucesso.'),
       icon: Rocket,
     },
   ];
@@ -41,8 +44,8 @@ export default function ProcessSection() {
       <BallpitCanvas />
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-        <ScrollFloat subtitle="Jornada Exclusiva" accent={true}>
-          Como Funciona o Processo?
+        <ScrollFloat subtitle={t('process.badge')} accent={true}>
+          {t('process.title')}
         </ScrollFloat>
 
         <div
@@ -68,18 +71,18 @@ export default function ProcessSection() {
                   backdropFilter: 'blur(20px)',
                   borderRadius: '20px',
                   padding: '36px 28px',
-                  border: '1px solid rgba(6, 182, 212, 0.25)',
+                  border: '1px solid rgba(0, 168, 255, 0.25)',
                   boxShadow: '0 15px 35px rgba(0, 0, 0, 0.6)',
                   transition: 'transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-6px)';
-                  e.currentTarget.style.borderColor = '#06b6d4';
-                  e.currentTarget.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(6, 182, 212, 0.2)';
+                  e.currentTarget.style.borderColor = '#00a8ff';
+                  e.currentTarget.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 168, 255, 0.2)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.borderColor = 'rgba(6, 182, 212, 0.25)';
+                  e.currentTarget.style.borderColor = 'rgba(0, 168, 255, 0.25)';
                   e.currentTarget.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.6)';
                 }}
               >
@@ -94,10 +97,10 @@ export default function ProcessSection() {
                 >
                   <span
                     style={{
-                      fontFamily: "'Cinzel', serif",
+                      fontFamily: "'JetBrains Mono', monospace",
                       fontSize: '2.4rem',
                       fontWeight: 700,
-                      background: 'linear-gradient(135deg, #06b6d4 0%, rgba(6, 182, 212, 0.3) 100%)',
+                      background: 'linear-gradient(135deg, #00a8ff 0%, rgba(0, 168, 255, 0.3) 100%)',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                     }}
@@ -110,12 +113,12 @@ export default function ProcessSection() {
                       width: 44,
                       height: 44,
                       borderRadius: '50%',
-                      backgroundColor: 'rgba(6, 182, 212, 0.1)',
-                      border: '1px solid rgba(6, 182, 212, 0.3)',
+                      backgroundColor: 'rgba(0, 168, 255, 0.1)',
+                      border: '1px solid rgba(0, 168, 255, 0.3)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#06b6d4',
+                      color: '#00a8ff',
                     }}
                   >
                     <Icon size={20} />
@@ -125,7 +128,7 @@ export default function ProcessSection() {
                 <p
                   style={{
                     fontSize: '0.75rem',
-                    color: '#06b6d4',
+                    color: '#00a8ff',
                     letterSpacing: '0.15em',
                     textTransform: 'uppercase',
                     fontWeight: 600,
@@ -137,7 +140,7 @@ export default function ProcessSection() {
 
                 <h3
                   style={{
-                    fontFamily: "'Cormorant Garamond', serif",
+                    fontFamily: "'JetBrains Mono', monospace",
                     fontSize: '1.6rem',
                     fontWeight: 400,
                     color: '#ffffff',
@@ -194,8 +197,8 @@ function BallpitCanvas() {
         vx: (Math.random() - 0.5) * 0.8,
         vy: (Math.random() - 0.5) * 0.8,
         radius: radius,
-        color: isGold ? 'rgba(6, 182, 212, 0.25)' : 'rgba(255, 255, 255, 0.08)',
-        borderColor: isGold ? 'rgba(6, 182, 212, 0.4)' : 'rgba(255, 255, 255, 0.15)',
+        color: isGold ? 'rgba(0, 168, 255, 0.25)' : 'rgba(255, 255, 255, 0.08)',
+        borderColor: isGold ? 'rgba(0, 168, 255, 0.4)' : 'rgba(255, 255, 255, 0.15)',
         glow: isGold,
       });
     }
@@ -252,8 +255,8 @@ function BallpitCanvas() {
         if (dist < mouse.radius + b.radius) {
           const angle = Math.atan2(dy, dx);
           const force = (mouse.radius + b.radius - dist) / (mouse.radius + b.radius);
-          b.vx += Math.cos(angle) * force * 0.4;
-          b.vy += Math.sin(angle) * force * 0.4;
+          b.vx += Math.cos(angle) * force * 5.0;
+          b.vy += Math.sin(angle) * force * 5.0;
         }
 
         // Friction damping

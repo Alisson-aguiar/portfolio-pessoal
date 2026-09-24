@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function CursorGrid() {
   const cursorDotRef = useRef(null);
@@ -49,7 +49,7 @@ export default function CursorGrid() {
       if (ring) {
         const scale = isHoveringInteractive ? 1.8 : 1;
         ring.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) scale(${scale})`;
-        ring.style.borderColor = isHoveringInteractive ? 'rgba(6, 182, 212, 0.9)' : 'rgba(6, 182, 212, 0.4)';
+        ring.style.borderColor = isHoveringInteractive ? 'rgba(0, 168, 255, 0.9)' : 'rgba(0, 168, 255, 0.4)';
       }
 
       // Draw subtle ambient grid glow around cursor
@@ -72,7 +72,7 @@ export default function CursorGrid() {
 
           if (dist < radius) {
             const alpha = (1 - dist / radius) * 0.25;
-            ctx.fillStyle = `rgba(6, 182, 212, ${alpha})`;
+            ctx.fillStyle = `rgba(0, 168, 255, ${alpha})`;
             ctx.beginPath();
             ctx.arc(x, y, 1.2, 0, Math.PI * 2);
             ctx.fill();
@@ -103,7 +103,7 @@ export default function CursorGrid() {
           position: 'fixed',
           top: 0,
           left: 0,
-          width: '100vw',
+          width: '100%',
           height: '100vh',
           pointerEvents: 'none',
           zIndex: 40,
@@ -119,11 +119,11 @@ export default function CursorGrid() {
           left: -3,
           width: 6,
           height: 6,
-          backgroundColor: '#06b6d4',
+          backgroundColor: '#00a8ff',
           borderRadius: '50%',
           pointerEvents: 'none',
           zIndex: 99999,
-          boxShadow: '0 0 10px #06b6d4',
+          boxShadow: '0 0 10px #00a8ff',
           transition: 'opacity 0.2s ease',
         }}
       />
@@ -137,7 +137,7 @@ export default function CursorGrid() {
           left: -18,
           width: 36,
           height: 36,
-          border: '1px solid rgba(6, 182, 212, 0.4)',
+          border: '1px solid rgba(0, 168, 255, 0.4)',
           borderRadius: '50%',
           pointerEvents: 'none',
           zIndex: 99998,

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion, animate, useInView } from 'framer-motion';
 import ScrollFloat from './ScrollFloat';
 import { Award, Terminal, Users } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 function CountUp({ to, duration = 2, suffix = '+' }) {
   const [count, setCount] = useState(0);
@@ -25,10 +26,11 @@ function CountUp({ to, duration = 2, suffix = '+' }) {
 }
 
 export default function AboutSection() {
+  const { t } = useTranslation();
   const stats = [
-    { value: 3, label: 'Anos de Experiência', icon: Terminal },
-    { value: 30, label: 'Projetos Desenvolvidos', icon: Award },
-    { value: 50, label: 'Clientes Satisfeitos', icon: Users },
+    { value: 3, label: t('about.stat1_label'), icon: Terminal },
+    { value: 30, label: t('about.stat2_label'), icon: Award },
+    { value: 50, label: t('about.stat3_label'), icon: Users },
   ];
 
   const imageRef = useRef(null);
@@ -52,7 +54,7 @@ export default function AboutSection() {
 
     setGlareStyle({
       opacity: 1,
-      background: `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(6, 182, 212, 0.25) 0%, transparent 60%)`,
+      background: `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(0, 168, 255, 0.25) 0%, transparent 60%)`,
       transition: 'none',
     });
   };
@@ -71,8 +73,8 @@ export default function AboutSection() {
   return (
     <section id="sobre" className="section-spacing" style={{ position: 'relative' }}>
       <div className="container">
-        <ScrollFloat subtitle="Sobre o Desenvolvedor" accent={true}>
-          A Arte do Código
+        <ScrollFloat subtitle={t('about.badge')} accent={true}>
+          {t('about.title')}
         </ScrollFloat>
 
         <div
@@ -86,6 +88,7 @@ export default function AboutSection() {
         >
           {/* Left Column: Photographer Photo */}
           <motion.div
+            className="about-photo-col"
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -181,7 +184,7 @@ export default function AboutSection() {
                 <div>
                   <p
                     style={{
-                      fontFamily: "'Cinzel', serif",
+                      fontFamily: "'JetBrains Mono', monospace",
                       fontSize: '1.2rem',
                       letterSpacing: '0.1em',
                       color: '#ffffff',
@@ -194,13 +197,13 @@ export default function AboutSection() {
                   <p
                     style={{
                       fontSize: '0.85rem',
-                      color: '#06b6d4',
+                      color: '#00a8ff',
                       letterSpacing: '0.15em',
                       textTransform: 'uppercase',
                       textShadow: '0 4px 10px rgba(0,0,0,0.5)',
                     }}
                   >
-                    Desenvolvedor Web & Web Designer
+                    {t('about.photoBadge')}
                   </p>
                 </div>
               </div>
@@ -209,6 +212,7 @@ export default function AboutSection() {
 
           {/* Right Column: Bio & TextPressure & Stats */}
           <motion.div
+            className="about-text-col"
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -222,14 +226,14 @@ export default function AboutSection() {
           >
             <div style={{ marginBottom: '24px' }}>
               <h2 style={{
-                fontFamily: "'Cormorant Garamond', serif",
+                fontFamily: "'JetBrains Mono', monospace",
                 fontSize: 'clamp(2rem, 4vw, 3rem)',
                 fontWeight: 100,
                 color: '#ffffff',
                 lineHeight: 1.1,
                 margin: 0
               }}>
-                Muito prazer, eu sou <span style={{ color: '#06b6d4' }}>Alisson Aguiar.</span>
+                {t('about.greeting1')}<span style={{ color: '#00a8ff' }}>{t('about.greeting2')}</span>
               </h2>
             </div>
 
@@ -243,7 +247,7 @@ export default function AboutSection() {
                 marginBottom: '20px',
               }}
             >
-              Sou um Desenvolvedor Full Stack focado em transformar ideias em interfaces digitais modernas. Minha atuação foca no equilíbrio perfeito entre código limpo, arquitetura escalável e uma sólida experiência de usuário (UX/UI).
+              {t('about.description1')}
             </p>
 
             <p
@@ -256,7 +260,7 @@ export default function AboutSection() {
                 marginBottom: '20px',
               }}
             >
-              Atualmente, lidero o desenvolvimento de projetos web corporativos, utilizando tecnologias de ponta como React, Node.js e WordPress. Meu foco constante é entregar sistemas orientados à alta conversão, com excelente SEO e velocidade de carregamento superior.
+              {t('about.description2')}
             </p>
 
             <div
@@ -269,11 +273,11 @@ export default function AboutSection() {
                 marginBottom: '40px',
               }}
             >
-              <h3 style={{ color: '#ffffff', marginBottom: '10px' }}>Minhas Especialidades:</h3>
+              <h3 style={{ color: '#ffffff', marginBottom: '10px' }}>{t('about.specialtiesTitle')}</h3>
               <ul style={{ listStyleType: 'none', padding: 0 }}>
-                <li style={{ marginBottom: '8px' }}>• <strong>Front-end:</strong> React, Next.js, Vue.js, TypeScript</li>
-                <li style={{ marginBottom: '8px' }}>• <strong>Back-end & CMS:</strong> Node.js, PHP, WordPress, Shopify</li>
-                <li style={{ marginBottom: '8px' }}>• <strong>UX/UI:</strong> Figma, Prototipagem e Design Responsivo</li>
+                <li style={{ marginBottom: '8px' }}>• {t('about.specFront')}</li>
+                <li style={{ marginBottom: '8px' }}>• {t('about.specBack')}</li>
+                <li style={{ marginBottom: '8px' }}>• {t('about.specUI')}</li>
               </ul>
             </div>
 
@@ -283,7 +287,7 @@ export default function AboutSection() {
               style={{
                 display: 'grid',
                 gap: '20px',
-                borderTop: '1px solid rgba(6, 182, 212, 0.2)',
+                borderTop: '1px solid rgba(0, 168, 255, 0.2)',
                 paddingTop: '32px',
               }}
             >
@@ -299,10 +303,10 @@ export default function AboutSection() {
                         marginBottom: '6px',
                       }}
                     >
-                      <IconComponent size={18} color="#06b6d4" className='mobile-stats-icon' />
+                      <IconComponent size={18} color="#00a8ff" className='mobile-stats-icon' />
                       <span className='mobile-stats-span'
                         style={{  
-                          fontFamily: "'Cormorant Garamond', serif",
+                          fontFamily: "'JetBrains Mono', monospace",
                           fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
                           fontWeight: 600,
                           color: '#ffffff',
@@ -340,6 +344,15 @@ export default function AboutSection() {
           }
 
           @media (max-width: 960px) {
+            .about-grid {
+              grid-template-columns: 1fr !important;
+            }
+            .about-photo-col {
+              order: 1;
+            }
+            .about-text-col {
+              order: 2;
+            }
             .stats-grid {
               grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
               gap: 32px !important;
